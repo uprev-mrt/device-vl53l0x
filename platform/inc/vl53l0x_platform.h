@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright © 2015, STMicroelectronics International N.V.
+Copyright ï¿½ 2015, STMicroelectronics International N.V.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "vl53l0x_def.h"
 #include "vl53l0x_platform_log.h"
-#include "vl53l0x_i2c_platform.h"
+//#include "vl53l0x_i2c_platform.h"
+#include "Devices/RegDevice/register_device.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,10 +59,11 @@ extern "C" {
 typedef struct {
     VL53L0X_DevData_t Data;               /*!< embed ST Ewok Dev  data as "Data"*/
 
+    mrt_regdev_t mRegDev;            	//ptr to base register-device
     /*!< user specific field */
-    uint8_t   I2cDevAddr;                /*!< i2c device address user specific field */
-    uint8_t   comms_type;                /*!< Type of comms : VL53L0X_COMMS_I2C or VL53L0X_COMMS_SPI */
-    uint16_t  comms_speed_khz;           /*!< Comms speed [kHz] : typically 400kHz for I2C           */
+//    uint8_t   I2cDevAddr;                /*!< i2c device address user specific field */
+//    uint8_t   comms_type;                /*!< Type of comms : VL53L0X_COMMS_I2C or VL53L0X_COMMS_SPI */
+//    uint16_t  comms_speed_khz;           /*!< Comms speed [kHz] : typically 400kHz for I2C           */
 
 } VL53L0X_Dev_t;
 
@@ -98,6 +100,8 @@ typedef VL53L0X_Dev_t* VL53L0X_DEV;
  * @brief    PAL Register Access Functions
  *  @{
  */
+
+void tof_init_i2c(VL53L0X_Dev_t* dev, mrt_i2c_handle_t i2c);
 
 /**
  * Lock comms interface to serialize all commands to a shared I2C interface for a specific device
