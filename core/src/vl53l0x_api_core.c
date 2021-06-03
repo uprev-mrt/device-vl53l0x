@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright © 2016, STMicroelectronics International N.V.
+ Copyright ï¿½ 2016, STMicroelectronics International N.V.
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -1786,6 +1786,9 @@ VL53L0X_Error VL53L0X_calc_sigma_estimate(VL53L0X_DEV Dev,
 		finalRangeVcselPCLKS = VL53L0X_GETDEVICESPECIFICPARAMETER(
 			Dev, FinalRangeVcselPulsePeriod);
 
+		if (finalRangeVcselPCLKS == 0)
+			finalRangeVcselPCLKS = 1;
+
 		finalRangeMacroPCLKS = VL53L0X_calc_timeout_mclks(
 			Dev, finalRangeTimeoutMicroSecs, finalRangeVcselPCLKS);
 
@@ -1795,6 +1798,9 @@ VL53L0X_Error VL53L0X_calc_sigma_estimate(VL53L0X_DEV Dev,
 
 		preRangeVcselPCLKS = VL53L0X_GETDEVICESPECIFICPARAMETER(
 			Dev, PreRangeVcselPulsePeriod);
+
+		if (preRangeVcselPCLKS == 0)
+			preRangeVcselPCLKS = 1;
 
 		preRangeMacroPCLKS = VL53L0X_calc_timeout_mclks(
 			Dev, preRangeTimeoutMicroSecs, preRangeVcselPCLKS);
@@ -1955,6 +1961,8 @@ VL53L0X_Error VL53L0X_calc_sigma_estimate(VL53L0X_DEV Dev,
 		}
 		finalRangeIntegrationTimeMilliSecs =
 			(finalRangeTimeoutMicroSecs + preRangeTimeoutMicroSecs + 500)/1000;
+		if (finalRangeIntegrationTimeMilliSecs == 0)
+			finalRangeIntegrationTimeMilliSecs = 1;
 
 		/* sigmaEstRef = 1mm * 25ms/final range integration time (inc pre-range)
 		 * sqrt(FixPoint1616/int) = FixPoint2408)
