@@ -27,8 +27,8 @@ desc: |
 category: Device/Sensors
 requires: [RegDevice,Platform]
 datasheet: https://www.st.com/resource/en/datasheet/vl53l0x.pdf
-mfg: STMicroelectronics
-mfg_pn: VL53L0CXV0DH/1
+mfr: STMicroelectronics
+mfr_pn: VL53L0CXV0DH/1
 digikey_pn: 497-16538-2-ND
 
 prefix: VL53
